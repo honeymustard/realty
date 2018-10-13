@@ -38,9 +38,11 @@ app.get('/api/datum', (req, res) => {
     .catch(e => console.log(e));
 });
 
+app.use('/', express.static(path.join(__dirname, 'dist')));
+
 // Pass all requests to index
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(port, () => console.log(`Realty: listing on ${port}`));
