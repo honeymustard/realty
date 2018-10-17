@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm-run-all --parallel serve:dev serve",
+    "start": "npm-run-all --parallel serve serve:dev",
     "serve": "nodemon ./server.js",
     "serve:dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
