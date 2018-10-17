@@ -12,6 +12,8 @@
     --color-yellow: #ff5;
     --color-pink: #f8d;
     --color-gray: #ddd;
+    --color-white: #fff;
+    --color-black: #000;
   }
 
   body {

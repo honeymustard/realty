@@ -1,13 +1,18 @@
 <template>
   <div class="home">
     <loading v-if="loading"></loading>
-    <graph v-else :datum="datum"></graph>
+    <main class="main" v-else>
+      <section class="module">
+        <h2 class="module-title">New realties (last 10 days)</h2>
+      </section>
+      <bar-chart :datum="datum.slice(-10)"></bar-chart>
+    </main>
   </div>
 </template>
 
 <script>
   import Loading from '@/components/Loading';
-  import Graph from '@/components/Graph';
+  import BarChart from '@/components/BarChart';
 
   export default {
     data() {
@@ -18,7 +23,7 @@
     },
     components: {
       Loading,
-      Graph,
+      BarChart,
     },
     beforeMount() {
       fetch('/api/datum', {
@@ -37,3 +42,23 @@
     },
   };
 </script>
+
+<style lang="postcss">
+  .main {
+    padding-top: 100px;
+  }
+
+  .module {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .module-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    color: var(--color-white);
+  }
+</style>
