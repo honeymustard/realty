@@ -37,51 +37,95 @@
         ],
       };
     },
+    methods: {
+      clear() {
+        d3.select(this.chart)
+          .selectAll('g')
+          .remove();
+      },
+      draw() {
+        let width = this.chart.parentNode.clientWidth;
+        let height = this.chart.parentNode.clientHeight;
+
+        let x = d3.scaleBand()
+          .domain(this.datum.map(d => d.date))
+          .range([0, width])
+          .padding(0.2);
+
+        let y = d3.scaleLinear()
+          .domain([0, d3.max(this.datum, d => d.value)]).nice()
+          .range([height - 30, 10]);
+
+        let svg = d3.select(this.chart);
+
+        let scroll = svg.append('g');
+
+        if (window.innerWidth < width) {
+          let panX = width + (width - window.innerWidth);
+
+          svg
+            .append('g')
+            .append('rect')
+            .attr('width', width)
+            .attr('height', height)
+            .style('fill', 'none')
+            .style('pointer-events', 'all')
+            .call(d3.zoom()
+              .translateExtent([[0, 0], [panX, height]])
+              .on('zoom', zoomed));
+
+          function zoomed() {
+            let x = d3.event.transform.x;
+            scroll.attr('transform', `translate(${x},0)`);
+          }
+        }
+
+        scroll
+          .append('g')
+            .attr('class', 'barchart__bars')
+            .selectAll('rect')
+            .data(this.datum)
+            .enter()
+          .append('rect')
+            .attr('class', 'barchart__bar')
+            .attr('x', d => x(d.date))
+            .attr('y', d => y(d.value))
+            .attr('height', d => y(0) - y(d.value))
+            .attr('width', x.bandwidth())
+            .attr('style', (d, i) => `fill: ${this.colors.slice(-10)[i]}`);
+
+         scroll
+          .append('g')
+            .attr('class', 'barchart__labels')
+            .selectAll('text')
+            .data(this.datum)
+            .enter()
+          .append('text')
+            .attr('class', 'barchart__label')
+            .text(d => d.value)
+            .attr('y', d => y(d.value) - 10)
+            .attr('x', d => x(d.date) + (x.bandwidth() / 2))
+            .style('text-anchor', 'middle');
+
+        scroll
+          .append('g')
+            .attr('class', 'barchart__axes')
+          .append('g')
+            .attr('class', 'barchart__axis-x')
+            .attr('transform', `translate(0, ${height - 30})`)
+            .call(d3.axisBottom(x)
+              .tickSizeOuter(0)
+              .tickFormat(date => d3.timeFormat('%d/%m')(d3.isoParse(date))));
+      },
+    },
     mounted() {
       this.chart = document.querySelector('.barchart__chart');
-      let width = this.chart.parentNode.clientWidth;
-      let height = this.chart.parentNode.clientHeight;
+      this.draw();
 
-      let x = d3.scaleBand()
-        .domain(this.datum.map(d => d.date))
-        .range([0, width])
-        .padding(0.2);
-
-      let y = d3.scaleLinear()
-        .domain([0, d3.max(this.datum, d => d.value)]).nice()
-        .range([height - 30, 10]);
-
-      let svg = d3.select(this.chart);
-
-      let bars = svg
-        .append('g')
-          .attr('class', 'barchart__datum')
-          .selectAll('rect')
-          .data(this.datum)
-          .enter();
-
-      bars.append('rect')
-        .attr('class', 'barchart__bar')
-        .attr('x', d => x(d.date))
-        .attr('y', d => y(d.value))
-        .attr('height', d => y(0) - y(d.value))
-        .attr('width', x.bandwidth())
-        .attr('style', (d, i) => `fill: ${this.colors.slice(-10)[i]}`);
-
-      bars.append('text')
-        .attr('class', 'barchart__text')
-        .text(d => d.value)
-        .attr('y', d => y(d.value) - 10)
-        .attr('x', d => x(d.date) + (x.bandwidth() / 2))
-        .style('text-anchor', 'middle');
-
-      svg
-        .append('g')
-        .attr('class', 'barchart__xaxis')
-        .attr('transform', `translate(0, ${height - 30})`)
-        .call(d3.axisBottom(x)
-          .tickSizeOuter(0)
-          .tickFormat(date => d3.timeFormat('%d/%m')(d3.isoParse(date))));
+      window.addEventListener('resize', () => {
+        this.clear();
+        this.draw();
+      });
     },
   };
 </script>
@@ -99,25 +143,27 @@
     height: 340px;
     background-color: #5454;
     padding: 15px 0;
+    overflow: hidden;
   }
 
   .barchart-container {
     display: flex;
     width: 100%;
+    min-width: 800px;
   }
 
   .barchart__chart {
     width: 100%;
   }
 
-  .barchart__text {
+  .barchart__label {
     fill: var(--color-white);
     font-size: 32px;
     font-weight: 600;
     font-family: 'Source Sans Pro', sans-serif;
   }
 
-  .barchart__xaxis {
+  .barchart__axis-x {
     & text {
       fill: var(--color-white);
       font-size: 20px;
