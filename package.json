@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "npm-run-all --parallel serve serve:dev",
-    "serve": "pm2 start ./server.js --name realty",
-    "serve:dev": "vue-cli-service serve",
+    "start": "npm-run-all --parallel watch:server watch:build",
+    "serve": "pm2 start server.js --name realty",
+    "watch:server": "nodemon ./server.js",
+    "watch:build": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
