@@ -16,6 +16,12 @@
     --color-black: #000;
   }
 
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
   body {
     background-color: var(--color-blue);
   }

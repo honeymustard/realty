@@ -3,9 +3,11 @@
     <loading v-if="loading"></loading>
     <main class="main" v-else>
       <section class="module">
-        <h2 class="module-title">New realties (last 10 days)</h2>
+        <h2 class="module-title">Listings per day (last 10 days)</h2>
       </section>
-      <bar-chart :datum="datum.slice(-10)"></bar-chart>
+      <section class="module">
+        <bar-chart :datum="datum.slice(-10)"></bar-chart>
+      </section>
     </main>
   </div>
 </template>
@@ -44,21 +46,32 @@
 </script>
 
 <style lang="postcss">
+  @custom-media --grid-md-up (min-width: 768px);
+
   .main {
-    padding-top: 100px;
+    padding-top: 60px;
+
+    @media (--grid-md-up) {
+      padding-top: 100px;
+    }
   }
 
   .module {
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    padding: 0 15px;
   }
 
   .module-title {
     font-family: 'Noto Sans', sans-serif;
-    font-size: 30px;
+    font-size: 18px;
     line-height: 1.2;
     margin: 0 0 10px;
     color: var(--color-white);
+
+    @media (--grid-md-up) {
+      font-size: 22px;
+    }
   }
 </style>

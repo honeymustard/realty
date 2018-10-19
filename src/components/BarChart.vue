@@ -89,7 +89,7 @@
           .append('rect')
             .attr('class', 'barchart__bar')
             .attr('x', d => x(d.date))
-            .attr('y', d => y(d.value))
+            .attr('y', d => y(d.value) < 0 ? 0 : y(d.value))
             .attr('height', d => y(0) - y(d.value))
             .attr('width', x.bandwidth())
             .attr('style', (d, i) => `fill: ${this.colors.slice(-10)[i]}`);
@@ -131,8 +131,11 @@
 </script>
 
 <style lang="postcss">
+  @custom-media --grid-md-up (min-width: 768px);
+  @custom-media --grid-lg-up (min-width: 1000px);
+
   .barchart {
-    margin: 20px auto 0;
+    margin: 20px -15px 0;
   }
 
   .barchart-inner {
@@ -149,7 +152,12 @@
   .barchart-container {
     display: flex;
     width: 100%;
-    min-width: 800px;
+    min-width: 1000px;
+    cursor: move;
+
+    @media (--grid-lg-up) {
+      cursor: auto;
+    }
   }
 
   .barchart__chart {
