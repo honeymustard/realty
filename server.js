@@ -1,4 +1,5 @@
 let express = require('express');
+let moment = require('moment');
 let fetch = require('node-fetch');
 let path = require('path');
 let secrets = require('./secrets');
@@ -20,8 +21,8 @@ let getToken = user => {
   .then(res => res.token);
 }
 
-let getDatum = token => {
-  return fetch(`${host}/api/realty/datum`, {
+let getRoute = (route, token) => {
+  return fetch(route, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -31,9 +32,10 @@ let getDatum = token => {
   .then(res => res.json());
 }
 
-app.get('/api/datum', (req, res) => {
+app.get('/api/datum/latest', (req, res) => {
+  let tenDaysAgo = moment().subtract(10, 'days').format('YYYY-MM-DD');
   getToken(secrets.user)
-    .then(getDatum)
+    .then(token => getRoute(`${host}/api/realty/datum?from=${tenDaysAgo}`, token))
     .then(datum => res.send(datum))
     .catch(e => console.log(e));
 });

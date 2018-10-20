@@ -6,7 +6,7 @@
         <h2 class="module-title">Listings per day (last 10 days)</h2>
       </section>
       <section class="module">
-        <bar-chart :datum="datum.slice(-10)"></bar-chart>
+        <bar-chart :datum="datum"></bar-chart>
       </section>
     </main>
   </div>
@@ -28,7 +28,7 @@
       BarChart,
     },
     beforeMount() {
-      fetch('/api/datum', {
+      fetch('/api/datum/latest', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',

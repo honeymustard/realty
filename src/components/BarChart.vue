@@ -136,6 +136,7 @@
 
   .barchart {
     margin: 20px -15px 0;
+    padding-left: 15px;
   }
 
   .barchart-inner {
@@ -143,17 +144,26 @@
     margin: 0 auto;
     width: 100%;
     display: flex;
-    height: 340px;
+    height: 280px;
     background-color: #5454;
     padding: 15px 0;
     overflow: hidden;
+
+    @media (--grid-md-up) {
+      height: 340px;
+    }
   }
 
   .barchart-container {
     display: flex;
     width: 100%;
-    min-width: 1000px;
+    min-width: 760px;
+    padding: 0 15px 0 0;
     cursor: move;
+
+    @media (--grid-md-up) {
+      min-width: 768px;
+    }
 
     @media (--grid-lg-up) {
       cursor: auto;
@@ -166,17 +176,25 @@
 
   .barchart__label {
     fill: var(--color-white);
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 600;
     font-family: 'Source Sans Pro', sans-serif;
+
+    @media (--grid-md-up) {
+      font-size: 32px;
+    }
   }
 
   .barchart__axis-x {
     & text {
       fill: var(--color-white);
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       font-family: 'Source Sans Pro', sans-serif;
+
+      @media (--grid-md-up) {
+        font-size: 20px;
+      }
     }
 
     & line,
