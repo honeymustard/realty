@@ -2,11 +2,12 @@
   <div class="home">
     <loading v-if="loading"></loading>
     <main class="main" v-else>
-      <section class="module">
-        <h2 class="module-title">Listings per day (last 10 days)</h2>
+      <heading></heading>
+      <section class="row">
+        <bar-chart :datum="datum" :title="chartTitle"></bar-chart>
       </section>
-      <section class="module">
-        <bar-chart :datum="datum"></bar-chart>
+      <section class="row">
+        <footing></footing>
       </section>
     </main>
   </div>
@@ -14,6 +15,8 @@
 
 <script>
   import Loading from '@/components/Loading';
+  import Heading from '@/components/Heading';
+  import Footing from '@/components/Footing';
   import BarChart from '@/components/BarChart';
 
   export default {
@@ -21,10 +24,13 @@
       return {
         datum: [],
         loading: true,
+        chartTitle: 'Listings per day (last 10 days)',
       };
     },
     components: {
       Loading,
+      Heading,
+      Footing,
       BarChart,
     },
     beforeMount() {
@@ -48,30 +54,11 @@
 <style lang="postcss">
   @custom-media --grid-md-up (min-width: 768px);
 
-  .main {
-    padding-top: 60px;
-
-    @media (--grid-md-up) {
-      padding-top: 100px;
-    }
-  }
-
-  .module {
+  .row {
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
     padding: 0 15px;
-  }
-
-  .module-title {
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 18px;
-    line-height: 1.2;
-    margin: 0 0 10px;
-    color: var(--color-white);
-
-    @media (--grid-md-up) {
-      font-size: 22px;
-    }
+    position: relative;
   }
 </style>

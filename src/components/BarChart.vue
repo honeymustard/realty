@@ -1,5 +1,6 @@
 <template>
   <div class="barchart">
+    <label class="barchart-title">{{title}}</label>
     <div class="barchart-inner">
       <div class="barchart-container">
         <svg class="barchart__chart"></svg>
@@ -17,24 +18,15 @@
         type: Array,
         required: true,
       },
+      title: {
+        type: String,
+        required: false,
+        default: '',
+      },
     },
     data() {
       return {
         chart: null,
-        colors: [
-          '#dec814', // gold
-          '#64df0d', // green
-          '#e38919', // orange
-          '#ff4adc', // pink
-          '#ff5670', // rose
-          '#9af443', // apple
-          '#ff5918', // brown
-          '#9ad6b0', // teal
-          '#efe024', // yellow
-          '#68cb30', // ocean
-          '#be6b9c', // purple
-          '#db426e', // ribbon
-        ],
       };
     },
     methods: {
@@ -91,8 +83,7 @@
             .attr('x', d => x(d.date))
             .attr('y', d => y(d.value) < 0 ? 0 : y(d.value))
             .attr('height', d => y(0) - y(d.value))
-            .attr('width', x.bandwidth())
-            .attr('style', (d, i) => `fill: ${this.colors.slice(-10)[i]}`);
+            .attr('width', x.bandwidth());
 
          scroll
           .append('g')
@@ -137,6 +128,33 @@
   .barchart {
     margin: 20px -15px 0;
     padding-left: 15px;
+
+    @media (--grid-md-up) {
+      padding-right: 15px;
+    }
+  }
+
+  .barchart-title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 15px;
+    display: block;
+    color: var(--color-white);
+    position: absolute;
+    left: 30px;
+    top: 15px;
+
+    @media (--grid-md-up) {
+      font-size: 22px;
+      right: 30px;
+      left: auto;
+    }
+
+    @media (--grid-lg-up) {
+      right: 45px;
+    }
   }
 
   .barchart-inner {
@@ -144,13 +162,19 @@
     margin: 0 auto;
     width: 100%;
     display: flex;
-    height: 280px;
+    height: 340px;
     background-color: #5454;
-    padding: 15px 0;
+    padding: 50px 0 10px;
     overflow: hidden;
 
     @media (--grid-md-up) {
-      height: 340px;
+      height: 420px;
+      padding: 60px 0 20px;
+    }
+
+    @media (--grid-lg-up) {
+      height: 400px;
+      padding: 80px 15px 20px;
     }
   }
 
@@ -174,6 +198,11 @@
     width: 100%;
   }
 
+  .barchart__bar {
+    fill: var(--color-pink);
+    opacity: .9;
+  }
+
   .barchart__label {
     fill: var(--color-white);
     font-size: 22px;
@@ -181,6 +210,10 @@
     font-family: 'Source Sans Pro', sans-serif;
 
     @media (--grid-md-up) {
+      font-size: 26px;
+    }
+
+    @media (--grid-lg-up) {
       font-size: 32px;
     }
   }
