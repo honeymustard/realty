@@ -71,6 +71,13 @@
 
   .heading-link {
     display: inline-block;
+    transition: all .3s linear;
+    transform-origin: 50% 50%;
+
+    &:hover,
+    &:focus {
+      transform: rotate(30deg);
+    }
   }
 
   .heading-github {
@@ -79,16 +86,10 @@
     width: 40px;
     fill: var(--color-blue);
     opacity: .9;
-    transition: opacity .3s ease;
 
     @media(--grid-lg-up) {
       height: 55px;
       width: 55px;
-    }
-
-    &:hover,
-    &:focus {
-      opacity: .7;
     }
   }
 </style>
