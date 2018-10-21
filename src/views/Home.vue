@@ -52,8 +52,6 @@
 </script>
 
 <style lang="postcss">
-  @custom-media --grid-md-up (min-width: 768px);
-
   .row {
     max-width: 1000px;
     margin: 0 auto;

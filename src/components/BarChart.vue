@@ -122,8 +122,7 @@
 </script>
 
 <style lang="postcss">
-  @custom-media --grid-md-up (min-width: 768px);
-  @custom-media --grid-lg-up (min-width: 1000px);
+  @import 'base.css';
 
   .barchart {
     margin: 20px -15px 0;

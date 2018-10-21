@@ -4,13 +4,9 @@
   </svg>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style lang="postcss">
+  @import 'base.css';
+
   .logo {
     max-width: 100%;
     display: block;

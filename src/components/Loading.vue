@@ -4,13 +4,8 @@
   </div>
 </template>
 
-<script>
-  export default {
-
-  };
-</script>
-
 <style lang="postcss">
+  @import 'base.css';
 
   @keyframes spin {
     100% {

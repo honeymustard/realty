@@ -22,8 +22,7 @@
 </script>
 
 <style lang="postcss">
-  @custom-media --grid-md-up (min-width: 768px);
-  @custom-media --grid-lg-up (min-width: 1000px);
+  @import 'base.css';
 
   .footing {
     margin: 40px 0 0;

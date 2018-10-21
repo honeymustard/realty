@@ -1,0 +1,11 @@
+:root {
+  --color-blue: #07d;
+  --color-yellow: #ff5;
+  --color-pink: #f8d;
+  --color-gray: #ddd;
+  --color-white: #fff;
+  --color-black: #000;
+}
+
+@custom-media --grid-md-up (min-width: 768px);
+@custom-media --grid-lg-up (min-width: 1000px);
