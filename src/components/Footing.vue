@@ -50,6 +50,7 @@
     position: fixed;
     bottom: 0;
     transition: transform .3s ease;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .08);
 
     &:hover,
     &:focus {
