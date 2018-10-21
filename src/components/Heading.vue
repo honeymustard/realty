@@ -30,13 +30,14 @@
     position: relative;
     background-color: var(--color-pink);
     margin: 0 0 40px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, .08);
 
     @media(--grid-md-up) {
       margin: 0 0 60px;
     }
 
     @media(--grid-lg-up) {
-      margin: 0 0 80px;
+      margin: 0 0 100px;
     }
   }
 

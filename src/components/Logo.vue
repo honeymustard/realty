@@ -1,6 +1,5 @@
 <template>
   <svg class="logo" viewBox="0 0 140.5 150.5" x="0.5" y="0.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" shape-rendering="crispEdges">
-    <title>honeymustard.io</title>
     <defs>
       <symbol id="cube">
         <rect width="10" height="10" class="logo-cube" />

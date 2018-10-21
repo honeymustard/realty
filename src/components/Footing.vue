@@ -1,6 +1,6 @@
 <template>
   <footer class="footing">
-    <a class="footing-link" :href="link" :title="title">
+    <a class="footing-link" :href="link">
       <logo></logo>
     </a>
   </footer>
@@ -13,7 +13,6 @@
     data() {
       return {
         link: 'https://honeymustard.io',
-        title: 'honeymustard.io',
       };
     },
     components: {
@@ -29,6 +28,7 @@
   .footing {
     margin: 40px 0 0;
     display: flex;
+    justify-content: flex-end;
 
     @media (--grid-md-up) {
       margin: 80px 0 0;
