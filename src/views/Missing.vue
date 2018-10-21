@@ -23,7 +23,7 @@
 
   .missing-title {
     font-size: 50px;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Cairo', sans-serif;
     text-align: center;
     margin: 60px 0 0;
 
@@ -34,7 +34,7 @@
   }
 
   .missing-link {
-    color: var(--color-yellow);
+    color: var(--color-pink);
     text-decoration: none;
   }
 </style>

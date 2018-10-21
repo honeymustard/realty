@@ -58,14 +58,15 @@
     position: relative;
     top: -2px;
     color: var(--color-blue);
-    font-family: 'Noto Sans', sans-serif;
-    letter-spacing: 2px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px;
     opacity: .9;
     flex-grow: 1;
     user-select: none;
 
     @media(--grid-lg-up) {
-      top: -4px;
+      top: -2px;
       font-size: 50px;
     }
   }
