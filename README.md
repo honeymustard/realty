@@ -1,4 +1,4 @@
-# Realty
+# Realty.
 
 A front-end interface for the [Realty API](https://github.com/honeymustard/realty-api).
 
