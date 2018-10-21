@@ -208,6 +208,6 @@
   }
 
   .logo-cube {
-    fill: var(--color-pink);
+    fill: var(--color-blue);
   }
 </style>

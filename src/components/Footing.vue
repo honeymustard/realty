@@ -45,7 +45,7 @@
     text-decoration: none;
     width: 50px;
     height: 70px;
-    background-color: #5454;
+    background-color: var(--color-pink);
     opacity: .95;
     position: fixed;
     bottom: 0;
@@ -58,7 +58,7 @@
 
     @media (--grid-lg-up) {
       width: 60px;
-      height: 100px;
+      height: 80px;
     }
 
     & .logo {
