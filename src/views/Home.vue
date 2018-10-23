@@ -1,7 +1,6 @@
 <template>
-  <div class="home">
-    <loading v-if="loading"></loading>
-    <main class="main" v-else>
+  <div class="home" v-if="!loading">
+    <main class="main">
       <heading></heading>
       <section class="row">
         <bar-chart :datum="datum" :title="chartTitle"></bar-chart>
@@ -15,7 +14,6 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import Loading from '@/components/Loading';
   import Heading from '@/components/Heading';
   import Footing from '@/components/Footing';
   import BarChart from '@/components/BarChart';
@@ -23,26 +21,22 @@
   export default {
     data() {
       return {
-        loading: true,
         chartTitle: 'Listings per day (last 10 days)',
       };
     },
     components: {
-      Loading,
       Heading,
       Footing,
       BarChart,
     },
     computed: {
       ...mapGetters({
+        loading: 'getLoading',
         datum: 'getDatum',
       }),
     },
     beforeMount() {
-      this.$store.dispatch('fetchDatum')
-        .then(() => {
-          setTimeout(() => this.loading = false, 300);
-        });
+      this.$store.dispatch('fetchDatum');
     },
   };
 </script>

@@ -6,10 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     datum: [],
   },
 
   getters: {
+
+    getLoading(state) {
+      return state.loading;
+    },
+
     getDatum(state) {
       return state.datum;
     },
@@ -17,11 +23,26 @@ export default new Vuex.Store({
 
   actions: {
     fetchDatum({ commit }) {
-      api.fetchDatum().then(datum => commit('setDatum', datum));
+      commit('startLoading');
+
+      api.fetchDatum()
+        .then(datum => commit('setDatum', datum))
+        .then(() => commit('stopLoading'));
     }
   },
 
   mutations: {
+
+    startLoading(state) {
+      state.loading = true;
+    },
+
+    stopLoading(state) {
+      setTimeout(() =>
+      state.loading = false, 600);
+
+    },
+
     setDatum(state, datum) {
       state.datum = datum;
     },
