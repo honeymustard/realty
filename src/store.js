@@ -11,7 +11,6 @@ export default new Vuex.Store({
   },
 
   getters: {
-
     getLoading(state) {
       return state.loading;
     },
@@ -32,15 +31,12 @@ export default new Vuex.Store({
   },
 
   mutations: {
-
     startLoading(state) {
       state.loading = true;
     },
 
     stopLoading(state) {
-      setTimeout(() =>
-      state.loading = false, 600);
-
+      setTimeout(() => state.loading = false, 600);
     },
 
     setDatum(state, datum) {

@@ -32,7 +32,7 @@
     border-width: 30px;
     border-style: solid;
     border-color: var(--color-pink);
-    border-left-color: var(--color-yellow);
+    border-left-color: #5454;
     animation: spin 1.5s linear infinite;
   }
 </style>
