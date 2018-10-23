@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import Loading from '@/components/Loading';
   import Heading from '@/components/Heading';
   import Footing from '@/components/Footing';
@@ -22,7 +23,6 @@
   export default {
     data() {
       return {
-        datum: [],
         loading: true,
         chartTitle: 'Listings per day (last 10 days)',
       };
@@ -33,20 +33,16 @@
       Footing,
       BarChart,
     },
+    computed: {
+      ...mapGetters({
+        datum: 'getDatum',
+      }),
+    },
     beforeMount() {
-      fetch('/api/datum/latest', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(datum => {
-        this.$store.commit('setDatum', datum);
-        this.datum = datum;
-
-        setTimeout(() => this.loading = false, 300);
-      });
+      this.$store.dispatch('fetchDatum')
+        .then(() => {
+          setTimeout(() => this.loading = false, 300);
+        });
     },
   };
 </script>
