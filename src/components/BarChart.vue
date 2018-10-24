@@ -45,7 +45,7 @@
           .padding(0.2);
 
         let y = d3.scaleLinear()
-          .domain([0, d3.max(this.datum, d => d.value)]).nice()
+          .domain([0, d3.max(this.datum, d => d.value) + 10]).nice()
           .range([height - 30, 10]);
 
         let svg = d3.select(this.chart);
@@ -82,7 +82,10 @@
             .attr('class', 'barchart__bar')
             .attr('x', d => x(d.date))
             .attr('y', d => y(d.value) < 0 ? 0 : y(d.value))
-            .attr('height', d => y(0) - y(d.value))
+            .attr('height', d => {
+              let barHeight = y(0) - y(d.value);
+              return barHeight < 0 ? 0 : barHeight;
+            })
             .attr('width', x.bandwidth());
 
          scroll
